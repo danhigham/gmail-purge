@@ -6,9 +6,7 @@ on:
 
 jobs:
   gmail-purge:
-    runs-on: ubuntu-latest
-    steps:
-    - name: "Run purge"
-      uses: docker://danhigham/gmail-purge:main
-      env:
-        GOOGLE_TOKEN: ${{ secrets.GOOGLE_TOKEN }}
+    container:
+      image: danhigham/gmail-purge:main
+    env:
+      GOOGLE_TOKEN: ${{ secrets.GOOGLE_TOKEN }}
