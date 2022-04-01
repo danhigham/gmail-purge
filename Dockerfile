@@ -1,10 +1,6 @@
-FROM golang:1.11-alpine
+FROM python:alpine
 
-WORKDIR /go/src/app
-COPY purge.go .
+COPY purge.py .
+RUN  pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
-RUN apk add git
-RUN go get -d -v ./...
-RUN go install -v ./...
-
-CMD ["app"]
+CMD ["purge.py"]

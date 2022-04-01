@@ -27,8 +27,7 @@ def get_next_page(service, next_page_token, callback):
     if next_page_token:
         get_next_page(service, next_page_token, callback)
 
-def archive_messages(messages):
-    
+def archive_messages(messages):    
     ids = [m['id'] for m in messages]
     root.info(f'Archiving {len(ids)} messages')
     service.users().messages().batchModify(userId='me', body={'ids': ids, body={'removeLabelIds': ['INBOX','UNREAD']}).execute()
