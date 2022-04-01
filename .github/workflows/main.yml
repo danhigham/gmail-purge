@@ -1,0 +1,14 @@
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron:  '30 9 * * *'
+
+  workflow_dispatch:
+
+jobs:
+  gmail-purge:
+    container:
+      image: danhigham/gmail-purge:main
+      env:
+        GOOGLE_TOKEN: ${{ secrets.GOOGLE_TOKEN }}
