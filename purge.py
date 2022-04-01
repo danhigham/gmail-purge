@@ -21,13 +21,13 @@ root = logging.getLogger()
 def get_next_page(service, next_page_token, callback):
     results = service.users().messages().list(userId='me', q='is:unread older_than:1d', pageToken=next_page_token).execute()
     messages = results.get('messages', [])
-    callback(messages)
+    callback(service, messages)
 
     next_page_token = results.get('nextPageToken', None)
     if next_page_token:
         get_next_page(service, next_page_token, callback)
 
-def archive_messages(messages):    
+def archive_messages(service, messages):    
     ids = [m['id'] for m in messages]
     root.info(f'Archiving {len(ids)} messages')
     service.users().messages().batchModify(userId='me', body={'ids': ids, 'removeLabelIds': ['INBOX','UNREAD']}).execute()
