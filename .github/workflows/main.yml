@@ -6,6 +6,7 @@ on:
 
 jobs:
   gmail-purge:
+    runs-on: ubuntu-latest
     container:
       image: danhigham/gmail-purge:main
     env:
